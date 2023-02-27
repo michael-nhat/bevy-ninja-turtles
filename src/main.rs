@@ -12,8 +12,6 @@ fn wtf () {
     println!("wtf");
 }
 
-
-
 fn hello_world() {
     println!("hello world!");
 }
