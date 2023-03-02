@@ -1,23 +1,40 @@
 use bevy::prelude::*;
+mod camera;
+pub use camera::*;
+// use bevy_rapier2d::prelude::*;
 
+#[allow(dead_code)]
 struct Postion { x:f32, y: f32 }
 
-fn print_position_system(query: Query<&Transform>) {
-    for transorm in query.iter() {
-        println!("postion: {:?}", transform.translation)
-    }
-}
-
-fn wtf () {
-    println!("wtf");
-}
-
-fn hello_world() {
-    println!("hello world!");
-}
+struct Player;
 
 fn main(){
-    App::build().run()
-        .add_system(hello_world.system())
+    App::build()
+        .insert_resource(WindowDescriptor {
+            title: "Platform!".to_string(),
+            width: 640.0,
+            height: 400.0,
+            vsync: true,
+            ..Default::default()
+        })
+        .insert_resource(ClearColor(Color::rgb(0.04, 0.04, 0.04)))
+        .add_startup_system(setup.system())
+        .add_startup_stage("player_setup", SystemStage::single(spawn_player.system()))
+        .add_plugins(DefaultPlugins)
         .run();
+}
+
+fn setup(mut commands: Commands) {
+    commands.spawn_bundle(new_camera_2d());
+}
+
+#[allow(dead_code)]
+fn spawn_player(mut commands: Commands, mut materials: ResMut<Assets<ColorMaterial>>) {
+    commands
+        .spawn_bundle(SpriteBundle {
+            material: materials.add(Color::rgb(0.7, 0.7, 0.7).into()),
+            sprite: Sprite::new(Vec2::new(1.0, 1.0)),
+            ..Default::default()
+        })
+        .insert(Player);
 }
