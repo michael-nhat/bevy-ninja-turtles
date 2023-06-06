@@ -12,5 +12,5 @@ pub fn new_camera_2d() -> OrthographicCameraBundle {
         ..Default::default()
     };
     camera.transform.scale = Vec3::new(10., 10., 1.);
-    return camera;
+    camera
 }

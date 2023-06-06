@@ -51,10 +51,10 @@ fn spawn_player(mut commands: Commands, mut materials: ResMut<Assets<ColorMateri
     commands
         .spawn_bundle(SpriteBundle {
             material: materials.add(Color::rgb(0.7, 0.7, 0.7).into()),
-            sprite: Sprite::new(Vec2::new(1.0, 1.0)),
+            sprite: Sprite::new(Vec2::new(1., 1.)),
             ..Default::default()
         })
-        .insert_bundle(rigid_body)
+               .insert_bundle(rigid_body)
         .insert_bundle(collider)
         .insert(RigidBodyPositionSync::Discrete)
         .insert(Player);
